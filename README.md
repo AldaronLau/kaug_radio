@@ -24,3 +24,8 @@ flutter doctor
 ```
 
 ## Connect a device
+If you have an Android device, go into your settings and enable developer mode.  This is done by going into about device and tapping Build Number many times, then you can just plug it in and press the green arrow to install & run the app.
+
+If you don't have an Android device go to Tools > AVD Manager > Create A Virtual Device ... and probably just install the Virtual Device that's already selected.  Afterwards, your Virtual Device will show up under Tools > AVD Manager, and you can press the Arrow under Actions to launch it.  Now you can press the green arrow to install & run the app.
+
+Once you have the Android device plugged in, or the Virtual Device running, all you have to do is press the green arrow to install & run the app.
