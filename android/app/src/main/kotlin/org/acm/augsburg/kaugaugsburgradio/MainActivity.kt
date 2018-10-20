@@ -1,4 +1,4 @@
-package acm.augsburg.kaugapp
+package org.acm.augsburg.kaugaugsburgradio
 
 import android.os.Bundle
 

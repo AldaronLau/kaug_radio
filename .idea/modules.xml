@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/kaug_app.iml" filepath="$PROJECT_DIR$/kaug_app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/kaug_app_android.iml" filepath="$PROJECT_DIR$/kaug_app_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kaug_augsburg_radio_android.iml" filepath="$PROJECT_DIR$/kaug_augsburg_radio_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kaug_radio.iml" filepath="$PROJECT_DIR$/kaug_radio.iml" />
     </modules>
   </component>
 </project>
