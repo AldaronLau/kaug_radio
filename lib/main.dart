@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaug_augsburg_radio/Constants.dart';
 
 void main() => runApp(new MyApp());
 
@@ -66,6 +67,21 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return new Scaffold(
       appBar: new AppBar(
+        actions: <Widget>[
+          PopupMenuButton<String>(
+            onSelected: choiceAction,
+            itemBuilder: (BuildContext context){
+              return Constants.choices.map((String choice){
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+
+
+            }
+          )
+        ],
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: new Text(widget.title),
@@ -105,5 +121,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: new Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+  void choiceAction (String choice){
+    print('works');
   }
 }
