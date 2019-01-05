@@ -21,6 +21,12 @@ class MyApp extends StatelessWidget {
       900: Color(0xFFDD006E),
     };
 
+    Map<String, WidgetBuilder> routes = {
+      "/": home,
+//      "schedule": schedule,
+//      "about", about,
+    };
+
     MaterialColor colorCustom = MaterialColor(0xFF880044, color);
 
     return new MaterialApp(
@@ -36,30 +42,11 @@ class MyApp extends StatelessWidget {
         // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: colorCustom,
       ),
-      home: new MyHomePage(title: 'KAUG Radio - Home'),
+//      home: new MyHomePage(title: 'KAUG - Home'),
+      routes: routes,
     );
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => new _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   final html = """
     <h3>New KAUG App!</h3>
     <h4>Posted by Jeron Lau on Jan 5, 2019</h4>
@@ -68,30 +55,15 @@ class _MyHomePageState extends State<MyHomePage> {
     </p>
 """;
 
-  int _counter = 0;
+  void pause_play() {}
 
-  void pause_play() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+  Widget home(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         actions: <Widget>[
+          IconButton(
+              icon: Icon(IconData(0xe5d5, fontFamily: 'MaterialIcons')),
+              onPressed: refresh),
           PopupMenuButton<String>(
               onSelected: choiceAction,
               itemBuilder: (BuildContext context) {
@@ -105,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: new Text(widget.title),
+        title: new Text("Hello, World!"),
       ),
       body: ListView.builder(itemBuilder: load_post),
       floatingActionButton: new FloatingActionButton(
@@ -113,8 +85,25 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Listen to KAUG Radio',
         child: new Icon(Icons.play_arrow),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+      drawer: Drawer(
+          child: ListView(
+        children: <Widget>[
+          DrawerHeader(
+              child: Image.asset(
+            "images/kaug.png",
+            scale: 0.25,
+          )),
+          ListTile(title: const Text("Home"), onTap: () {/* switch to home */}),
+          ListTile(
+              title: const Text("Schedule"), onTap: () {/* switch to home */}),
+          ListTile(
+              title: const Text("About"), onTap: () {/* switch to home */}),
+        ],
+      )),
     );
   }
+
+  void refresh() {}
 
   void choiceAction(String choice) {
     print('works');
