@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kaug_augsburg_radio/Constants.dart';
+import 'package:flutter_html_view/flutter_html_view.dart';
 
 void main() => runApp(new MyApp());
 
@@ -7,6 +8,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Map<int, Color> color = {
+      50: Color(0xFF440022),
+      100: Color(0xFF55002A),
+      200: Color(0xFF660033),
+      300: Color(0xFF77003B),
+      400: Color(0xFF880044),
+      500: Color(0xFF99004C),
+      600: Color(0xFFAA0055),
+      700: Color(0xFFBB005D),
+      800: Color(0xFFCC0066),
+      900: Color(0xFFDD006E),
+    };
+
+    MaterialColor colorCustom = MaterialColor(0xFF880044, color);
+
     return new MaterialApp(
       title: 'KAUG Radio',
       theme: new ThemeData(
@@ -18,9 +34,9 @@ class MyApp extends StatelessWidget {
         // "hot reload" (press "r" in the console where you ran "flutter run",
         // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
         // counter didn't reset back to zero; the application is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: colorCustom,
       ),
-      home: new MyHomePage(title: 'Home Page'),
+      home: new MyHomePage(title: 'KAUG Radio - Home'),
     );
   }
 }
@@ -44,9 +60,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final html = """
+    <h3>New KAUG App!</h3>
+    <h4>Posted by Jeron Lau on Jan 5, 2019</h4>
+    <p>
+    Check it out!
+    </p>
+""";
+
   int _counter = 0;
 
-  void _incrementCounter() {
+  void pause_play() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -69,60 +93,37 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         actions: <Widget>[
           PopupMenuButton<String>(
-            onSelected: choiceAction,
-            itemBuilder: (BuildContext context){
-              return Constants.choices.map((String choice){
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice),
-                );
-              }).toList();
-
-
-            }
-          )
+              onSelected: choiceAction,
+              itemBuilder: (BuildContext context) {
+                return Constants.choices.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              })
         ],
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: new Text(widget.title),
       ),
-      body: new Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: new Column(
-          // Column is also layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug paint" (press "p" in the console where you ran
-          // "flutter run", or select "Toggle Debug Paint" from the Flutter tool
-          // window in IntelliJ) to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Text(
-              'You have pushed the button this many times:',
-            ),
-            new Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
-      ),
+      body: ListView.builder(itemBuilder: load_post),
       floatingActionButton: new FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: new Icon(Icons.add),
+        onPressed: pause_play,
+        tooltip: 'Listen to KAUG Radio',
+        child: new Icon(Icons.play_arrow),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-  void choiceAction (String choice){
+
+  void choiceAction(String choice) {
     print('works');
+  }
+
+  Widget load_post(BuildContext context, int index) {
+    if (index > 10) {
+      return null;
+    }
+    return new HtmlView(data: html);
   }
 }
