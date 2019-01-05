@@ -23,14 +23,14 @@ class MyApp extends StatelessWidget {
 
     Map<String, WidgetBuilder> routes = {
       "/": home,
-//      "schedule": schedule,
+      "schedule": schedule,
 //      "about", about,
     };
 
     MaterialColor colorCustom = MaterialColor(0xFF880044, color);
 
     return new MaterialApp(
-      title: 'KAUG Radio',
+      title: Constants.app_title,
       theme: new ThemeData(
         // This is the theme of your application.
         //
@@ -55,7 +55,111 @@ class MyApp extends StatelessWidget {
     </p>
 """;
 
-  void pause_play() {}
+  void pausePlay() {}
+
+  Widget about(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(IconData(0xe5d5, fontFamily: 'MaterialIcons')),
+              onPressed: refresh),
+          PopupMenuButton<String>(
+              onSelected: choiceAction,
+              itemBuilder: (BuildContext context) {
+                return Constants.choices.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              })
+        ],
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: new Text(Constants.aboutRouteTitle),
+      ),
+      body: ListView.builder(itemBuilder: loadPost),
+      floatingActionButton: new FloatingActionButton(
+        onPressed: pausePlay,
+        tooltip: Constants.listenTooltip,
+        child: new Icon(Icons.play_arrow),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+      drawer: Drawer(
+          child: ListView(
+        children: <Widget>[
+          DrawerHeader(child: Image.asset(Constants.kaug_icon, scale: 0.25)),
+          ListTile(
+              title: const Text(Constants.home),
+              onTap: () {
+                homeRoute(context);
+              }),
+          ListTile(
+              title: const Text(Constants.schedule),
+              onTap: () {
+                scheduleRoute(context);
+              }),
+          ListTile(
+              title: const Text(Constants.about),
+              onTap: () {
+                aboutRoute(context);
+              }),
+        ],
+      )),
+    );
+  }
+
+  Widget schedule(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(IconData(0xe5d5, fontFamily: 'MaterialIcons')),
+              onPressed: refresh),
+          PopupMenuButton<String>(
+              onSelected: choiceAction,
+              itemBuilder: (BuildContext context) {
+                return Constants.choices.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              })
+        ],
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: new Text(Constants.scheduleRouteTitle),
+      ),
+      body: ListView.builder(itemBuilder: loadPost),
+      floatingActionButton: new FloatingActionButton(
+        onPressed: pausePlay,
+        tooltip: Constants.listenTooltip,
+        child: new Icon(Icons.play_arrow),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+      drawer: Drawer(
+          child: ListView(
+        children: <Widget>[
+          DrawerHeader(child: Image.asset(Constants.kaug_icon, scale: 0.25)),
+          ListTile(
+              title: const Text(Constants.home),
+              onTap: () {
+                homeRoute(context);
+              }),
+          ListTile(
+              title: const Text(Constants.schedule),
+              onTap: () {
+                scheduleRoute(context);
+              }),
+          ListTile(
+              title: const Text(Constants.about),
+              onTap: () {
+                aboutRoute(context);
+              }),
+        ],
+      )),
+    );
+  }
 
   Widget home(BuildContext context) {
     return new Scaffold(
@@ -77,12 +181,12 @@ class MyApp extends StatelessWidget {
         ],
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: new Text("Hello, World!"),
+        title: new Text(Constants.homeRouteTitle),
       ),
-      body: ListView.builder(itemBuilder: load_post),
+      body: ListView.builder(itemBuilder: loadPost),
       floatingActionButton: new FloatingActionButton(
-        onPressed: pause_play,
-        tooltip: 'Listen to KAUG Radio',
+        onPressed: pausePlay,
+        tooltip: Constants.listenTooltip,
         child: new Icon(Icons.play_arrow),
       ), // This trailing comma makes auto-formatting nicer for build methods.
       drawer: Drawer(
@@ -90,26 +194,56 @@ class MyApp extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
               child: Image.asset(
-            "images/kaug.png",
+            Constants.kaug_icon,
             scale: 0.25,
           )),
-          ListTile(title: const Text("Home"), onTap: () {/* switch to home */}),
           ListTile(
-              title: const Text("Schedule"), onTap: () {/* switch to home */}),
+              title: const Text(Constants.home),
+              onTap: () {
+                homeRoute(context);
+              }),
           ListTile(
-              title: const Text("About"), onTap: () {/* switch to home */}),
+              title: const Text(Constants.schedule),
+              onTap: () {
+                scheduleRoute(context);
+              }),
+          ListTile(
+              title: const Text(Constants.about),
+              onTap: () {
+                aboutRoute(context);
+              }),
         ],
       )),
     );
   }
 
-  void refresh() {}
+  // Switch to the home route
+  void homeRoute(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute<void>(builder: home));
+  }
 
+  // Switch to the home route
+  void scheduleRoute(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute<void>(builder: schedule));
+  }
+
+  // Switch to the home route
+  void aboutRoute(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute<void>(builder: about));
+  }
+
+  // Download the most recent HTML to update the news feed.
+  void refresh() {
+    // TODO
+  }
+
+  // TODO
   void choiceAction(String choice) {
     print('works');
   }
 
-  Widget load_post(BuildContext context, int index) {
+  // Callback function for loading new posts.  After last post, returns null.
+  Widget loadPost(BuildContext context, int index) {
     if (index > 10) {
       return null;
     }
