@@ -61,13 +61,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final html = """
-  <p>
-    Build beautiful native apps in record time
-  </p>
-
-  <p>
-    Flutter is Google’s mobile app SDK for crafting high-quality native interfaces on iOS and Android in record time. Flutter works with existing code, is used by developers and organizations around the world, and is free and open source.
-  </p>
+    <h3>New KAUG App!</h3>
+    <h4>Posted by Jeron Lau on Jan 5, 2019</h4>
+    <p>
+    Check it out!
+    </p>
 """;
 
   int _counter = 0;
@@ -109,10 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: new Text(widget.title),
       ),
-      body: new Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
-          child: new HtmlView(data: html)),
+      body: ListView.builder(itemBuilder: load_post),
       floatingActionButton: new FloatingActionButton(
         onPressed: pause_play,
         tooltip: 'Listen to KAUG Radio',
@@ -123,5 +118,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void choiceAction(String choice) {
     print('works');
+  }
+
+  Widget load_post(BuildContext context, int index) {
+    if (index > 10) {
+      return null;
+    }
+    return new HtmlView(data: html);
   }
 }
