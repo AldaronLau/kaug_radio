@@ -20,28 +20,27 @@ class Schedule {
         actions: <Widget>[
           IconButton(
               icon: Icon(IconData(0xe5d5, fontFamily: 'MaterialIcons')),
-              onPressed: Home.refresh),
-          PopupMenuButton<String>(
-              onSelected: Shared.choiceAction,
-              itemBuilder: (BuildContext context) {
-                return Constants.choices.map((String choice) {
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice),
-                  );
-                }).toList();
-              })
+              onPressed: () {
+                Home.refresh(context);
+              }),
+          PopupMenuButton<String>(onSelected: (String choice) {
+            Shared.choiceAction(choice, context);
+          }, itemBuilder: (BuildContext context) {
+            return Constants.choices.map((String choice) {
+              return PopupMenuItem<String>(
+                value: choice,
+                child: Text(choice),
+              );
+            }).toList();
+          })
         ],
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: new Text(Constants.scheduleRouteTitle),
       ),
       body: ListView.builder(itemBuilder: loadPost),
-      floatingActionButton: new FloatingActionButton(
-        onPressed: Shared.pausePlay,
-        tooltip: Constants.listenTooltip,
-        child: new Icon(Icons.play_arrow),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: Shared
+          .play, // This trailing comma makes auto-formatting nicer for build methods.
       drawer: Drawer(
           child: ListView(
         children: <Widget>[

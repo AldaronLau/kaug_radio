@@ -21,7 +21,7 @@ class Constants {
     <p>
     Check it out!
     </p>
-""";
+  """;
 
   static const String Subscribe = "E-mail Subscribe";
   static const String Notifications = "Notifications Settings";
@@ -33,6 +33,7 @@ class Constants {
   static const String homeRouteTitle = "KAUG - Home";
   static const String scheduleRouteTitle = "KAUG - Schedule";
   static const String aboutRouteTitle = "KAUG - About";
+  static const String settingsRouteTitle = "KAUG - Settings";
 
   static const String listenTooltip = "Listen to KAUG Radio";
 

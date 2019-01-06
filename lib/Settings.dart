@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kaug_augsburg_radio/Shared.dart';
 import 'package:kaug_augsburg_radio/Constants.dart';
-import 'package:kaug_augsburg_radio/About.dart';
-import 'package:kaug_augsburg_radio/Schedule.dart';
 import 'package:flutter_html_view/flutter_html_view.dart';
+import 'package:kaug_augsburg_radio/Schedule.dart';
+import 'package:kaug_augsburg_radio/Home.dart';
+import 'package:kaug_augsburg_radio/About.dart';
 
-class Home {
-  // Download the most recent HTML to update the news feed.
-  static void refresh(BuildContext context) {
-    homeRoute(context);
-  }
-
+class Settings {
   // Callback function for loading new posts.  After last post, returns null.
   static Widget loadPost(BuildContext context, int index) {
     if (index > 10) {
@@ -19,14 +15,14 @@ class Home {
     return new HtmlView(data: Constants.html);
   }
 
-  static Widget home(BuildContext context) {
+  static Widget about(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         actions: <Widget>[
           IconButton(
               icon: Icon(IconData(0xe5d5, fontFamily: 'MaterialIcons')),
               onPressed: () {
-                refresh(context);
+                Home.refresh(context);
               }),
           PopupMenuButton<String>(onSelected: (String choice) {
             Shared.choiceAction(choice, context);
@@ -41,7 +37,7 @@ class Home {
         ],
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: new Text(Constants.homeRouteTitle),
+        title: new Text(Constants.settingsRouteTitle),
       ),
       body: ListView.builder(itemBuilder: loadPost),
       floatingActionButton: Shared
@@ -49,11 +45,7 @@ class Home {
       drawer: Drawer(
           child: ListView(
         children: <Widget>[
-          DrawerHeader(
-              child: Image.asset(
-            Constants.kaug_icon,
-            scale: 0.25,
-          )),
+          DrawerHeader(child: Image.asset(Constants.kaug_icon, scale: 0.25)),
           ListTile(
               title: const Text(Constants.home),
               onTap: () {
@@ -75,7 +67,7 @@ class Home {
   }
 
 // Switch to the home route
-  static void homeRoute(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute<void>(builder: home));
+  static void route(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute<void>(builder: about));
   }
 }
