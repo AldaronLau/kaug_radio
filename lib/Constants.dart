@@ -1,5 +1,27 @@
+import 'package:flutter/material.dart';
+
 class Constants {
-  static const String app_title = "KAUG Radio";
+  static const String appTitle = "KAUG Radio";
+  static const MaterialColor appColor = MaterialColor(0xFF880044, {
+    50: Color(0xFF440022),
+    100: Color(0xFF55002A),
+    200: Color(0xFF660033),
+    300: Color(0xFF77003B),
+    400: Color(0xFF880044),
+    500: Color(0xFF99004C),
+    600: Color(0xFFAA0055),
+    700: Color(0xFFBB005D),
+    800: Color(0xFFCC0066),
+    900: Color(0xFFDD006E),
+  });
+
+  static final html = """
+    <h3>New KAUG App!</h3>
+    <h4>Posted by Jeron Lau on Jan 5, 2019</h4>
+    <p>
+    Check it out!
+    </p>
+""";
 
   static const String Subscribe = "E-mail Subscribe";
   static const String Notifications = "Notifications Settings";
