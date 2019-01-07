@@ -19,7 +19,7 @@ class Constants {
     <h3>New KAUG App!</h3>
     <h4>Posted by Jeron Lau on Jan 5, 2019</h4>
     <p>
-    Check it out!
+    Example post!  Some text.
     </p>
   """;
 

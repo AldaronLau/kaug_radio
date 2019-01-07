@@ -76,6 +76,6 @@ class Home {
 
 // Switch to the home route
   static void homeRoute(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute<void>(builder: home));
+    Navigator.pushReplacement(context, MaterialPageRoute<void>(builder: home));
   }
 }

@@ -18,11 +18,6 @@ class About {
     return new Scaffold(
       appBar: new AppBar(
         actions: <Widget>[
-          IconButton(
-              icon: Icon(IconData(0xe5d5, fontFamily: 'MaterialIcons')),
-              onPressed: () {
-                Home.refresh(context);
-              }),
           PopupMenuButton<String>(onSelected: (String choice) {
             Shared.choiceAction(choice, context);
           }, itemBuilder: (BuildContext context) {
@@ -67,6 +62,6 @@ class About {
 
 // Switch to the home route
   static void aboutRoute(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute<void>(builder: about));
+    Navigator.pushReplacement(context, MaterialPageRoute<void>(builder: about));
   }
 }

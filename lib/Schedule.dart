@@ -18,11 +18,6 @@ class Schedule {
     return new Scaffold(
       appBar: new AppBar(
         actions: <Widget>[
-          IconButton(
-              icon: Icon(IconData(0xe5d5, fontFamily: 'MaterialIcons')),
-              onPressed: () {
-                Home.refresh(context);
-              }),
           PopupMenuButton<String>(onSelected: (String choice) {
             Shared.choiceAction(choice, context);
           }, itemBuilder: (BuildContext context) {
@@ -67,6 +62,7 @@ class Schedule {
 
 // Switch to the home route
   static void scheduleRoute(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute<void>(builder: schedule));
+    Navigator.pushReplacement(
+        context, MaterialPageRoute<void>(builder: schedule));
   }
 }

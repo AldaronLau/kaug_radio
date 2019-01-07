@@ -18,23 +18,6 @@ class Settings {
   static Widget about(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(IconData(0xe5d5, fontFamily: 'MaterialIcons')),
-              onPressed: () {
-                Home.refresh(context);
-              }),
-          PopupMenuButton<String>(onSelected: (String choice) {
-            Shared.choiceAction(choice, context);
-          }, itemBuilder: (BuildContext context) {
-            return Constants.choices.map((String choice) {
-              return PopupMenuItem<String>(
-                value: choice,
-                child: Text(choice),
-              );
-            }).toList();
-          })
-        ],
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: new Text(Constants.settingsRouteTitle),
